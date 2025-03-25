@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .font-nunito {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Smooth transition for mobile menu */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        #home {
+            position: relative;
+            border-radius: 3rem;
+            /* rounded-3xl */
+            height: 50vh;
+            /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.507);
+            overflow: hidden;
+            /* Ensure the image doesn't overflow */
+        }
+
+        /* Pseudo-element for the blurred background image */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://img.freepik.com/free-psd/user-interface-design-website-template_23-2149182791.jpg?t=st=1742447648~exp=1742451248~hmac=d3b0139885cbe745e653220cfad9d676945fca10fe6afb5ea4eecf88f43053c7&w=1380');
+            /* Replace with your image URL */
+            background-size: co;
+            /* Ensure the image covers the entire container */
+            background-position: center;
+            /* Center the background image */
+            background-attachment: fixed;
+            /* Creates a parallax scrolling effect */
+            filter: blur(px);
+            /* Apply blur effect */
+            opacity: 1;
+            /* Apply opacity */
+            z-index: -1;
+            /* Place it behind the content */
+            border-radius: 3rem;
+            /* Match rounded-3xl */
+        }
+
+        .project-card:hover img {
+            border-radius: 1.5rem;
+            /* rounded-3xl */
+            transform: scale(1.05);
+            /* Slight zoom-in effect */
+            transition: transform 0.3s, border-radius 0.3s;
+        }
+
+        /* Ensure the text content is above the blurred background */
+        #home>* {
+            position: relative;
+            z-index: 1;
+            /* Place content above the blurred background */
+        }
+
+
+        /* Custom styles for the rotating effect */
+        .earth-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .earth {
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/originals/b8/30/b7/b830b79effffcc8c61a77bf14393766f.gif') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: relative;
+            animation: rotateEarth 20s linear infinite;
+        }
+
+        @keyframes rotateEarth {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .text-card {
+            position: absolute;
+            width: 100px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease;
+        }
+
+        /* Custom hover effect for icons */
+        .icon-hover {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .icon-hover:hover {
+            transform: scale(1.2);
+        }
+
+        .sticky-image {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+
+</head>
+
+
+
+<body class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 font-nunito font-bold">
+
+    <!-- =====================================================================================================================================================================================
+                                              NAVBAR 
+===================================================================================================================================================================================== -->
+
+    <nav
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-70 backdrop-blur-md shadow-lg rounded-full py-2 px-4 sm:px-6 z-50 w-11/12 sm:w-auto">
+        <div class="flex items-center justify-between">
+            <!-- Logo or Name -->
+            <div class="text-lg sm:text-xl font-bold text-gray-800 py-2 px-4">DARSHAN DHAMELIYA</div>
+            <!-- Hamburger Menu Button (Visible only on mobile) -->
+            <button class="sm:hidden p-2 focus:outline-none" onclick="toggleMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <!-- Navigation Links (Visible only on desktop) -->
+            <div class="hidden sm:flex sm:space-x-6">
+                <a href="#home" class="text-sm sm:text-base hover:text-blue-600">Home</a>
+                <a href="#about" class="text-sm sm:text-base hover:text-blue-600">About</a>
+                <a href="#projects" class="text-sm sm:text-base hover:text-blue-600">Projects</a>
+                <a href="#skills" class="text-sm sm:text-base hover:text-blue-600">Skills</a>
+                <a href="#education" class="text-sm sm:text-base hover:text-blue-600">Education</a>
+                <a href="#experience" class="text-sm sm:text-base hover:text-blue-600">Experience</a>
+                <a href="#contact" class="text-sm sm:text-base hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay for Mobile Menu -->
+    <div id="overlay" class="fixed inset-0 z-40 hidden" onclick="toggleMenu()"></div>
+
+    <!-- Mobile Menu (Appears in the top-middle position) -->
+    <div id="mobile-menu"
+        class="fixed top-20 left-1/2 transform -translate-x-1/2 w-11/12 bg-white bg-opacity-50 backdrop-blur-md shadow-lg text-center py-4 px-6 z-50 hidden opacity-0 translate-y-[-20px]"
+        style="border-radius: 30px;">
+        <div class="flex flex-col space-y-4">
+            <a href="#home" class="text-sm hover:text-blue-600">Home</a>
+            <a href="#about" class="text-sm hover:text-blue-600">About</a>
+            <a href="#projects" class="text-sm hover:text-blue-600">Projects</a>
+            <a href="#skills" class="text-sm hover:text-blue-600">Skills</a>
+            <a href="#education" class="text-sm hover:text-blue-600">Education</a>
+            <a href="#experience" class="text-sm hover:text-blue-600">Experience</a>
+            <a href="#contact" class="text-sm hover:text-blue-600">Contact</a>
+        </div>
+    </div>
+
+    <!-- =====================================================================================================================================================================================
+                                                                   HOME
+===================================================================================================================================================================================== -->
+
+    <!-- Sticky Chat Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/<8320450187>?text=Hello!" target="_blank"
+            class="flex items-center justify-center bg-white bg-opacity-40 text-green-800 backdrop-blur-md rounded-full p-4 shadow-lg transition-all transform hover:scale-105 active:scale-95">
+             <i data-lucide="message-circle" class="w-6 h-6"></i>
+             <span class="ml-2">Chat with Me</span>
+         </a>
+         
+    </div>
+
+    <div class="container mx-auto p-8 space-y-8 pt-24">
+        <div class="relative">
+ 
+            <!-- Your Animated Heading Section -->
+            <div id="about"
+                class="flex flex-col items-center justify-center max-w-8xl mx-auto relative sticky top-6 z-10">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 text-center sm:text-5xl md:text-4xl animated-heading">
+                    Hi, I'm Darshan Dhameliya, a Creative Frontend & Designing Developer crafting sleek, user-focused
+                    web experiences.
+                </h2>
+            </div>
+
+
+            <!-- Content Section (Scrolls over the sticky text) -->
+            <div class="container mt-20 z-20 relative ">
+                <div id="home" class="text-center" style="box-shadow: 0 0 80px 100px rgb(255, 255, 255);">
+                    <h1
+                        class="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400 px-10">
+                        Designing with Flair, Developing with Care.
+                    </h1>
+                    <p class="text-white text-xl p-5">
+                        Hey there! Step into my world of Design & Code Magic
+                    </p>
+                    <div class="mt-6">
+                        <button
+                            class="bg-white bg-opacity-60 text-black backdrop-blur-md py-2 px-4 rounded-xl flex items-center justify-center mx-auto">
+                            <i data-lucide="download" class="mr-2"></i>
+                            Download Resume
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================================================================================================================================================
+    ABOUT ME 
+    ===================================================================================================================================================================================== -->
+
+        <!-- About Section -->
+
+        <section class="max-w-8xl mx-auto py-12 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 items-center">
+
+                <!-- Text Section (25% on Desktop, Full Width on Mobile) -->
+                <div class="col-span-1 md:col-span-1 relative sticky top-6 overflow-hidden rounded-full m-5"
+                    style="height: AUTO;">
+                    <div class="absolute inset-0 bg-cover bg-center "
+                        style="background-image: url('https://i.pinimg.com/originals/ea/2e/6c/ea2e6cdca64991c2790859262f8cb24b.gif'); filter: blur(0px);">
+                    </div>
+                    <div
+                        class="relative z-10 p-6 rounded-full text-black h-full flex flex-col justify-center text-center" id="Projects">
+                        <h2 class="text-3xl font-bold mb-4">MY PROJECTS</h2>
+                        <p class="mb-6">Making Websites That Wooo and Wow!</p>
+                    </div>
+                </div>
+
+
+                <!-- Projects Grid (75% on Desktop, Full Width on Mobile) -->
+                <div class="col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-44 ">
+                    <!-- Project Card 1 -->
+                    <div
+                        class="relative group w-full h-[310px] md:h-[400px] lg:h-[350px] rounded-3xl overflow-hidden cursor-pointer transition-all">
+                        <img src="\Emart.png"
+                            alt="Photography"
+                            class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-contain md:object-cover rounded-3xl">
+
+                        <!-- Tags Positioned Vertically on the Left Side -->
+                        <div
+                            class="absolute inset-y-1/2 left-1 transform -translate-y-1/2 flex flex-col space-y-2 md:space-y-2">
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm fpx-2 py-1 rounded-lg">E-mart
+                            </span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">React
+                                Js</span>
+                            <span
+                                class="bg-white bg-opacity-70 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Tailwind</span>
+                            <span
+                                class="bg-white bg-opacity-70 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Html/Css</span>
+                        </div>
+
+                        <!-- Button -->
+                         <div class="flex">
+
+                             <a href="https://gregarious-genie-5a1050.netlify.app/"
+                             class="absolute bottom-4 right-4 bg-black text-white p-4 px-5 rounded-2xl transition">
+                             ➔
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+
+                    <div
+                        class="relative group w-full h-[390px] md:h-[400px] lg:h-[350px] rounded-3xl overflow-hidden cursor-pointer transition-all">
+                        <img src=" Rectangle 7.png"
+                            alt="Photography"
+                            class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-contain md:object-cover rounded-3xl p-5">
+
+                        <!-- Tags Positioned Vertically on the Left Side -->
+                        <div
+                            class="absolute inset-y-1/2 left-1 transform -translate-y-1/2 flex flex-col space-y-2 md:space-y-2">
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Techbrand</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Figma</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">React
+                                Js</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Tailwind</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Html/Css</span>
+                        </div>
+
+                        <!-- Button -->
+                        <a href=""
+                            class="absolute bottom-4 right-4 bg-black text-white p-4 px-5 rounded-2xl transition">
+                            ➔
+                        </a>
+                    </div>
+
+                    <!-- Project Card 3 -->
+
+                    <div
+                        class="relative group w-full h-[350px] md:h-[400px] lg:h-[400px] rounded-3xl overflow-hidden cursor-pointer transition-all">
+                        <img src="shofy7.png"
+                            alt="Photography"
+                            class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-contain md:object-cover rounded-3xl">
+ 
+                          <!-- Tags Positioned Vertically on the Left Side -->                         
+
+                        <div 
+                            class="absolute inset-y-1/2 left-1 transform -translate-y-1/2 flex flex-col space-y-2 md:space-y-2">
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Shofy
+                                Project</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Bootstrap</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Html</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Css</span>
+                        </div>
+
+                        <!-- Button -->
+                        <a href="https://dashing-wisp-8ba9dc.netlify.app/"
+                            class="absolute bottom-4 right-4 bg-black text-white p-4 px-5 rounded-2xl transition">
+                            ➔
+                        </a>
+                    </div>
+
+                    <!-- Project Card 4 -->
+
+                    <div
+                        class="relative group w-full h-[350px] md:h-[400px] lg:h-[400px] rounded-3xl overflow-hidden cursor-pointer transition-all">
+                        <img src="portfolio.png"
+                            alt="Photography"
+                            class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-contain md:object-cover rounded-3xl">
+
+                        <!-- Tags Positioned Vertically on the Left Side -->
+                        <div
+                            class="absolute inset-y-1/2 left-1 transform -translate-y-1/2 flex flex-col space-y-2 md:space-y-2">
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Portfolio</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Bootstrap</span>
+                            <span
+                                class="bg-white bg-opacity-60 text-black backdrop-blur-sm text-gray-900 text-sm px-2 py-1 rounded-lg">Html/css</span>
+                        </div>
+
+                        <!-- Button -->
+                        <a href="https://portfolio-p03.netlify.app/"
+                         
+                            class="absolute bottom-4 right-4 bg-black text-white p-4 px-5 rounded-2xl transition">
+                            ➔
+                        </a>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <div id="education" class="mt-20">
+            <h1
+            class="text-6xl my-24 font-bold bg-clip-text text-center text-transparent bg-gradient-to-r from-blue-800 to-purple-700 ">
+           Education
+        </h1>            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Education Card 1 -->
+                <div class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-right">
+                    <h3 class="text-xl font-semibold text-gray-800">SkillQude IT-Institute</h3>
+                    <p class="text-gray-600">Frontend Developer in React-js</p>
+                    <p class="text-gray-600">Ui/UX in Figma</p>
+                </div>
+                <!-- Education Card 2 -->
+                <div class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow" data-aos="fade-left">
+                    <h3 class="text-xl font-semibold text-gray-800">Dhanavantri College Of Diploma Engineering</h3>
+                    <p class="text-gray-600">Computer Engineering In Diploma</p>
+                    <p class="text-gray-600">Graduated: 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+        <section class="bg-black" style="border-top-left-radius: 35px; border-top-right-radius: 35px;" id="education">
+
+            <h1
+            class="text-6xl mb-24 mt-10 pt-10 font-bold bg-clip-text text-center text-transparent bg-gradient-to-r from-blue-700 to-purple-500 ">
+           My Service
+        </h1>    <div class="container mx-auto flex flex-col lg:flex-row gap-6 p-4">
+                
+                <!-- Left Side: Sticky Image -->
+                <div class="w-full lg:w-1/2 sticky-image absolute sticky top-6 overflow-hidden" style=" border-radius: 35PX; background-image: url('\my service.jpeg');">
+                </div>
+                
+                <!-- Right Side: Scrolling Content -->
+                <div class="w-full lg:w-1/2 p-2 space-y-12 relative">
+                    <section class="animate-fadeInUp bg-white p-5 text-center hover-scale bg-white bg-opacity-60 backdrop-blur-md" style="border-radius: 31px;">
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">Frontend Development</h1>
+                        <ul class="list-disc space-y-3 text-lg lg:text-xl text-gray-800">
+                            <br><p>Building responsive, interactive, and high-performance websites and web apps.</p>
+                            <br><p>Expertise in HTML, CSS, JavaScript, Tailwind CSS, and more.</p>
+                            <br><p>Cross-browser compatibility and mobile-first design.</p>
+                        </ul>
+                    </section>
+                    
+                    <section class="animate-fadeInUp bg-white text-center shadow-lg p-5 hover-scale bg-white bg-opacity-60 backdrop-blur-md" style="border-radius: 31px;">
+                        <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">UI/UX Design</h1>
+                        <ul class="list-disc space-y-3 text-lg lg:text-xl text-gray-800">
+                            <br><p>Creating modern, user-centric designs using Figma.</p>
+                            <br><p>Wireframing, prototyping, and high-fidelity designs.</p>
+                            <br><p>Improving user experience through research and usability testing.</p>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+
+
+    
+
+<section class="bg-black">
+
+<!-- Skills Section --> 
+    
+    <body class="bg-black " id="skills">
+        <!-- Earth Section -->
+        <div class="min-h-auto flex items-center justify-center  container mx-auto p-12 space-y-8 ">
+            
+            <div class="earth-container mt-24">
+                <!-- Earth Ball -->
+                <div class="earth "></div>
+                
+                <!-- Text Cards -->
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="1" style="top: 0%; left: 50%;">
+                    <h3 class="text-lg text-white font-semibold">React</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="2" style="top: 22%; left: 85%;">
+                    <h3 class="text-lg text-white font-semibold">Figma</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="3" style="top: 50%; left: 100%;">
+                    <h3 class="text-lg text-white font-semibold">Css</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="4" style="top: 77%; left: 85%;">
+                    <h3 class="text-lg text-white font-semibold">Tailwind</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="5" style="top: 100%; left: 50%;">
+                    <h3 class="text-lg text-white font-semibold">HTML</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="6" style="top: 77%; left: 15%;">
+                    <h3 class="text-lg text-white font-semibold">JavaScript</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="7" style="top: 50%; left: 0%;">
+                    <h3 class="text-lg text-white font-semibold">GitHub</h3>
+                </div>
+                <div class="text-card bg-white bg-opacity-20 backdrop-blur-md" data-card="8" style="top: 22%; left: 15%;">
+                    <h3 class="text-lg text-white font-semibold">Bootstrap</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GSAP Script -->
+        <script>
+            // Check if GSAP and ScrollTrigger are loaded
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Animate text cards on scroll
+                const textCards = gsap.utils.toArray('.text-card');
+                textCards.forEach((card, index) => {
+                    gsap.fromTo(card, {
+                        opacity: 0,
+                        scale: 0.5,
+                    }, 
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        scrollTrigger: {
+                            trigger: '.earth-container',
+                            start: 'top center',
+                            end: 'bottom center',
+                            scrub: true,
+                        },
+                        delay: index * 0.1, // Staggered delay
+                    });
+                });
+            } else {
+                console.error('GSAP or ScrollTrigger is not loaded. Please check the CDN links.');
+            }
+            </script>
+        </body>
+        
+        <!-- Experience Section -->
+        <div id="experience" class="mt-20 container mx-auto p-8 space-y-4">
+            <h1
+            class="text-5xl mb-24 mt-10 pt-10 font-bold bg-clip-text text-center text-transparent bg-gradient-to-r from-blue-700 to-purple-500 ">
+            Experience
+        </h1>
+            <div class="space-y-6 ">
+                <!-- Experience Cards -->
+                <div class="p-6 bg-white bg-opacity-10 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <h3 class="text-xl font-semibold text-gray-200">As a React-js Developer</h3>
+                    <p class="text-gray-300">Dignizant Technologys and LLP.</p>
+                    <p class="text-gray-300">6 Month </p>
+                </div>
+                <!-- Repeat for other experience entries -->
+            </div>
+        </div>
+        
+  <!-- Footer Section -->
+
+
+<!-- Footer Section -->
+<footer class="mt-20 bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-t-3xl shadow-lg container mx-auto p-8 space-y-4">
+    <div class="container mx-auto text-center space-y-10">
+        
+        <h1
+        class="text-4xl mb-2 mt-5 font-bold bg-clip-text text-center text-transparent bg-gradient-to-r from-blue-700 to-purple-500 ">
+        Contact
+    </h1>
+
+        <!-- Social Links -->
+        <div class="flex justify-center space-x-6" data-aos="fade-up" data-aos-delay="200">
+            <!-- GitHub -->
+            <a href="https://github.com/Dhameliya1412" class="text-purple-500 hover:text-black transition-transform transform hover:scale-110">
+                <i data-lucide="github" class="w-6 h-6"></i>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/darshan-dhameliya-25367822a/" class="text-blue-500 hover:text-blue-900 transition-transform transform hover:scale-110">
+                <i data-lucide="linkedin" class="w-6 h-6"></i>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/<YOUR_PHONE_NUMBER>?text=Hello!" target="_blank" class="text-green-500 hover:text-green-800 transition-transform transform hover:scale-110">
+                <i data-lucide="phone" class="w-6 h-6"></i>
+            </a>
+            <!-- Email -->
+            <a href="mailto:Dhameliya583@gmail.com" class="text-red-600 hover:text-red-800 transition-transform transform hover:scale-110">
+                <i data-lucide="mail" class="w-6 h-6"></i>
+            </a>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="text-gray-300 space-y-2" data-aos="fade-up" data-aos-delay="300">
+            <p class="text-sm">📞 Contact Number: <span class="hover:underline cursor-pointer" onclick="navigator.clipboard.writeText('<YOUR_PHONE_NUMBER>')"><YOUR_PHONE_NUMBER></span></p>
+            <p class="text-sm">✉️ Email: <span class="hover:underline cursor-pointer" onclick="navigator.clipboard.writeText('Dhameliya583@gmail.com')">Dhameliya583@gmail.com</span></p>
+            <p class="text-sm">📍 Location: Surat, Gujarat, India</p>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="space-y-4" data-aos="fade-up" data-aos-delay="400">
+            <p class="text-gray-300 text-sm">Subscribe to my newsletter for updates:</p>
+            <form class="flex justify-center space-x-2">
+                <input type="email" placeholder="Your email" class="p-2 rounded-lg outline-none bg-gray-800 text-white placeholder-gray-500 focus:ring-2 focus:ring-purple-500">
+                <button class="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Back to Top Button -->
+        <div>
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="bg-black text-white p-2 px-5 rounded-full hover:bg-purple-700 transition-transform transform hover:scale-110" data-aos="fade-up" data-aos-delay="500">
+                ↑ Back to Top
+            </button>
+        </div>
+
+        <!-- Copyright & Terms -->
+        <div class="text-gray-400 text-xs" data-aos="fade-up" data-aos-delay="600">
+            <p>© 2025 Darshan Dhameliya. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a></p>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+</section>
+    
+</div>
+</body>
+
+</html>
+
+<!-- =====================================================================================================================================================================================
+                                                                            Java-Script 
+===================================================================================================================================================================================== -->
+
+<!-- Lucide Icons Initialization -->
+<script>
+    lucide.createIcons();
+</script>
+
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // JavaScript to toggle the mobile menu
+    function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('overlay');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('opacity-0');
+        menu.classList.toggle('translate-y-[-20px]');
+        overlay.classList.toggle('hidden');
+    }
+    ScrollReveal().reveal('[data-sr]', {
+        distance: '50px',
+        duration: 800,
+        easing: 'ease-out',
+        origin: 'bottom'
+    });
+
+    const skillsContainer = document.getElementById('skillsContainer');
+
+    window.addEventListener('scroll', () => {
+        const rotation = window.scrollY / 10;
+        skillsContainer.style.transform = `rotate(${rotation}deg)`;
+    });
+
+    AOS.init({
+        duration: 1000, // Animation duration
+        once: true, // Whether animation should happen only once
+    });
+
+    // Adding animations on scroll
+    window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const triggerPoint = window.innerHeight / 1.2;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < triggerPoint) {
+                    section.classList.add('animate-fadeInUp');
+                } else {
+                    section.classList.remove('animate-fadeInUp');
+                }
+            });
+        });
+
+
+    lucide.createIcons();
+
+</script>
+
+
+<!-- https://www.format.com/wp-content/uploads/design_portfolio_cta_screen.jpg.webp   desktop image  -->
